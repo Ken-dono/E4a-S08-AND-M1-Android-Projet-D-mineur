@@ -22,36 +22,41 @@
         android:layout_marginBottom="48dp"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:paddingHorizontal="5dp">
 
         <ImageButton
-            android:layout_width="120dp"
-            android:layout_height="96dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/easy_unchecked"
             android:id="@+id/easy_button"
             android:onClick="onDifficultySelected"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:layout_weight="1"/>
 
         <ImageButton
-            android:layout_width="120dp"
-            android:layout_height="96dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/medium_unchecked"
             android:id="@+id/medium_button"
             android:onClick="onDifficultySelected"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:layout_weight="1"/>
 
         <ImageButton
-            android:layout_width="120dp"
-            android:layout_height="96dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/hard_unchecked"
             android:id="@+id/hard_button"
             android:onClick="onDifficultySelected"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
