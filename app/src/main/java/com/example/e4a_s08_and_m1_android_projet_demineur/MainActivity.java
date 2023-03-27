@@ -11,32 +11,61 @@ import com.example.e4a_s08_and_m1_android_projet_demineur.databinding.ActivityMa
 public class MainActivity extends AppCompatActivity {
 
     private String selectedDifficulty;
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.example.e4a_s08_and_m1_android_projet_demineur.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-    }
 
-    public void onDifficultySelected(View view) {
-        switch (view.getId()) {
-            case R.id.easy_button:
+        binding.easyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 selectedDifficulty = "easy";
-                break;
-            case R.id.medium_button:
-                selectedDifficulty = "medium";
-                break;
-            case R.id.hard_button:
-                selectedDifficulty = "hard";
-                break;
-            default:
-                selectedDifficulty = "easy"; // Default to easy difficulty if no button is selected
-                break;
-        }
 
-        // Start the game activity and pass the selected difficulty as an extra
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("difficulty", selectedDifficulty);
-        startActivity(intent);
+                binding.easyButton.setBackgroundResource(R.drawable.easy_checked);
+                binding.mediumButton.setBackgroundResource(R.drawable.medium_unchecked);
+                binding.hardButton.setBackgroundResource(R.drawable.hard_unchecked);
+
+                binding.validateButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.mediumButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedDifficulty = "medium";
+
+                binding.easyButton.setBackgroundResource(R.drawable.easy_unchecked);
+                binding.mediumButton.setBackgroundResource(R.drawable.medium_checked);
+                binding.hardButton.setBackgroundResource(R.drawable.hard_unchecked);
+
+                binding.validateButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.hardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedDifficulty = "hard";
+
+                binding.easyButton.setBackgroundResource(R.drawable.easy_unchecked);
+                binding.mediumButton.setBackgroundResource(R.drawable.medium_unchecked);
+                binding.hardButton.setBackgroundResource(R.drawable.hard_checked);
+
+                binding.validateButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.validateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the game activity and pass the selected difficulty as an extra
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra("difficulty", selectedDifficulty);
+                startActivity(intent);
+            }
+        });
     }
 }
