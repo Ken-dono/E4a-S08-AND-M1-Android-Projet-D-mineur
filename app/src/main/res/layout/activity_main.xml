@@ -3,35 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@android:color/background_dark">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_difficulty"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="48dp"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/easy"
-        android:id="@+id/easy_button"
-        android:onClick="onDifficultySelected"/>
+        android:orientation="horizontal"
+        android:layout_marginBottom="32dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medium"
-        android:id="@+id/medium_button"
-        android:onClick="onDifficultySelected"/>
+        <Button
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/easy_button_bg"
+            android:id="@+id/easy_button"
+            android:onClick="onDifficultySelected"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hard"
-        android:id="@+id/hard_button"
-        android:onClick="onDifficultySelected"/>
+        <Button
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/medium_button_bg"
+            android:id="@+id/medium_button"
+            android:onClick="onDifficultySelected"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
+        <Button
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/hard_button_bg"
+            android:id="@+id/hard_button"
+            android:onClick="onDifficultySelected"/>
+
+    </LinearLayout>
 
 </LinearLayout>
