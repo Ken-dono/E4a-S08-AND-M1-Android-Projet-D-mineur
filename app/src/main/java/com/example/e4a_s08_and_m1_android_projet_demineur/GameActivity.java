@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -103,6 +105,25 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
                 flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
             }
         });
+
+        flagSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                mineSweeperGame.toggleMode();
+                if(isChecked){
+
+                    GradientDrawable border = new GradientDrawable();
+                    border.setColor(0xFFFFFFFF);
+                    border.setStroke(1, 0xFF000000);
+                }else{
+                    GradientDrawable border = new GradientDrawable();
+                    border.setColor(0xFFFFFFFF);
+                }
+            }
+        });
+
+
 
         }
 
