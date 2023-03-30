@@ -5,4 +5,8 @@
     <string name="easy">FACILE</string>
     <string name="select_difficulty">Choisissez la difficulté</string>
     <string name="validate">Valider</string>
+    <string name="default_count">000</string>
+    <string name="smiley">😃</string>
+    <string name="flag">🚩</string>
+    <string name="bomb">💣</string>
 </resources>
