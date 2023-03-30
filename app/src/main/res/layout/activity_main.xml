@@ -11,89 +11,94 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_weight="1">
-
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:srcCompat="@drawable/bomb"/>
-
+            android:layout_height="150dp"
+            android:src="@drawable/bomb"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1">
         <Button
             android:id="@+id/classement"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="classement en ligne"
+            android:text="@string/classement_en_ligne"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/black">
         </Button>
-
-
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_difficulty"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="48dp"
-        android:layout_weight="2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="32dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center"
-        android:paddingHorizontal="5dp"
         android:layout_weight="1">
-
-        <ImageButton
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/easy_unchecked"
-            android:id="@+id/easy_button"
-            android:onClick="onDifficultySelected"
-            android:scaleType="fitCenter"
-            android:layout_weight="1"/>
+            android:text="@string/select_difficulty"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/medium_unchecked"
-            android:id="@+id/medium_button"
-            android:onClick="onDifficultySelected"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:scaleType="fitCenter"
-            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:paddingHorizontal="5dp"
+            android:layout_weight="1">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/hard_unchecked"
-            android:id="@+id/hard_button"
-            android:onClick="onDifficultySelected"
-            android:scaleType="fitCenter"
-            android:layout_weight="1"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/easy_unchecked"
+                android:id="@+id/easy_button"
+                android:onClick="onDifficultySelected"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"/>
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/medium_unchecked"
+                android:id="@+id/medium_button"
+                android:onClick="onDifficultySelected"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/hard_unchecked"
+                android:id="@+id/hard_button"
+                android:onClick="onDifficultySelected"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/validate_button"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="@string/validate"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
-        android:backgroundTint="@color/black"
-        android:layout_weight="1">
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/black">
     </Button>
-
-
-
-
 </LinearLayout>
