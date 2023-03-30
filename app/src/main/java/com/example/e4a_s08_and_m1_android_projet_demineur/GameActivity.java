@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     private Cellule[][] plateau;
 
     private RecyclerView grid;
-    private Switch flagSwitch = null;
+    //private Switch flagSwitch = null;
     private TextView restart, timer, flag, flagsLeft;
     private Button returnM;
     private MineGridRecyclerAdapter mineGridRecyclerAdapter;
@@ -70,7 +71,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
                 break;
         }
 
-        flagSwitch = findViewById(R.id.flag_Switch);
+
         flagsLeft = findViewById(R.id.flagsleft);
         grid = findViewById(R.id.grid);
         grid.setLayoutManager(new GridLayoutManager(this, taille));
@@ -115,22 +116,6 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
                 startActivity(intent);
             }
         });
-        flagSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                mineSweeperGame.toggleMode();
-                if(isChecked){
-
-                    GradientDrawable border = new GradientDrawable();
-                    border.setColor(0xFFFFFFFF);
-                    border.setStroke(1, 0xFF000000);
-                }else{
-                    GradientDrawable border = new GradientDrawable();
-                    border.setColor(0xFFFFFFFF);
-                }
-            }
-        });
 
 
 
@@ -139,7 +124,31 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     @Override
     public void cellClick(Cell cell) {
         mineSweeperGame.handleCellClick(cell);
+        flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
 
+        if (!timerStarted) {
+            countDownTimer.start();
+            timerStarted = true;
+        }
+
+        if (mineSweeperGame.isGameOver()) {
+            countDownTimer.cancel();
+            Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            mineSweeperGame.getMineGrid().revealAllBombs();
+        }
+
+        if (mineSweeperGame.isGameWon()) {
+            countDownTimer.cancel();
+            Toast.makeText(getApplicationContext(), "Game Won", Toast.LENGTH_SHORT).show();
+            mineSweeperGame.getMineGrid().revealAllBombs();
+        }
+
+        mineGridRecyclerAdapter.setCells(mineSweeperGame.getMineGrid().getCells());
+    }
+
+
+    public void cellLongClick(Cell cell) {
+        mineSweeperGame.handleCellLongClick(cell);
         flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
 
         if (!timerStarted) {

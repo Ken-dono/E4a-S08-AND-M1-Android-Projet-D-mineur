@@ -3,6 +3,9 @@ package com.example.e4a_s08_and_m1_android_projet_demineur;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+
+
 public class MineSweeperGame {
     private MineGrid mineGrid;
     private boolean gameOver;
@@ -11,7 +14,7 @@ public class MineSweeperGame {
     private int flagCount;
     private int numberBombs;
     private boolean timeExpired;
-
+    private boolean longpressDetected = false;
     public MineSweeperGame(int size, int numberBombs) {
         this.gameOver = false;
         this.flagMode = false;
@@ -25,11 +28,14 @@ public class MineSweeperGame {
 
     public void handleCellClick(Cell cell) {
         if (!gameOver && !isGameWon() && !timeExpired && !cell.isRevealed()) {
-            if (clearMode) {
+
                 clear(cell);
-            } else if (flagMode) {
-                flag(cell);
-            }
+        }
+    }
+    public void handleCellLongClick(Cell cell) {
+        if (!gameOver && !isGameWon() && !timeExpired && !cell.isRevealed()) {
+
+            flag(cell);
         }
     }
 
