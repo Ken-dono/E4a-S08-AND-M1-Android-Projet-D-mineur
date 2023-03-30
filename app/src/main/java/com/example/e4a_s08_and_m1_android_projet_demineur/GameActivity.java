@@ -90,6 +90,20 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         mineGridRecyclerAdapter = new MineGridRecyclerAdapter(mineSweeperGame.getMineGrid().getCells(), this);
         grid.setAdapter(mineGridRecyclerAdapter);
 
+        restart = findViewById(R.id.restart);
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mineSweeperGame = new MineSweeperGame(taille, bombCount);
+                mineGridRecyclerAdapter.setCells(mineSweeperGame.getMineGrid().getCells());
+                timerStarted = false;
+                countDownTimer.cancel();
+                secondsElapsed = 0;
+                timer.setText(R.string.default_count);
+                flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
+            }
+        });
+
         }
 
     @Override
