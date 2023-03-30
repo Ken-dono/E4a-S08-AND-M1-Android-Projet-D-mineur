@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1017173002429",
+    "project_id": "demineur-5f051",
+    "storage_bucket": "demineur-5f051.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017173002429:android:e0c2dff3d631ec085e4fd4",
+        "android_client_info": {
+          "package_name": "com.example.e4a_s08_and_m1_android_projet_demineur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017173002429-kood06362f4ej3vqudp4dmb28rhcijt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcC5eZ8QxQtY1na20Ee9G7tUYzovgY_0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017173002429-kood06362f4ej3vqudp4dmb28rhcijt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
