@@ -5,11 +5,30 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/easy_checked" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/bomb"/>
+
+        <Button
+            android:id="@+id/classement"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="classement"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/black">
+        </Button>
+
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
