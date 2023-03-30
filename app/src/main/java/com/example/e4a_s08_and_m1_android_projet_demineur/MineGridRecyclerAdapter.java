@@ -61,6 +61,14 @@ public class MineGridRecyclerAdapter extends RecyclerView.Adapter<MineGridRecycl
                     listener.cellClick(cell);
                 }
             });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.cellLongClick(cell);
+                    return false;
+                }
+
+            });
 
             if (cell.isRevealed()) {
                 if (cell.getValue() == Cell.BOMB) {
