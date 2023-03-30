@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TableLayout;
@@ -36,6 +37,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     private RecyclerView grid;
     private Switch flagSwitch = null;
     private TextView restart, timer, flag, flagsLeft;
+    private Button returnM;
     private MineGridRecyclerAdapter mineGridRecyclerAdapter;
     private boolean timerStarted;
     private int secondsElapsed, taille, bombCount;
@@ -105,7 +107,14 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
                 flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
             }
         });
-
+        returnM = findViewById(R.id.ReturnMenu);
+        returnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         flagSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
