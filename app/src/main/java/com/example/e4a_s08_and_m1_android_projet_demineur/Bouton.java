@@ -11,29 +11,34 @@ import android.view.ViewGroup;
 import com.example.e4a_s08_and_m1_android_projet_demineur.databinding.FragmentBoutonBinding;
 
 import java.lang.reflect.Type;
+import java.util.Random;
 
 public class Bouton extends Fragment {
     private FragmentBoutonBinding binding;
     enum TypeDeCASE {BOMB, FLAG, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, HEIGHT, HIDDEN, VISIBLE};
     public int posX;
     public int posY;
-
+    private String test;
     public TypeDeCASE type;
+    public boolean status;
     public Bouton() {
 
         // Required empty public constructor
     }
 
-    public Bouton(TypeDeCASE t,int X,int Y) {
+    public Bouton(TypeDeCASE t,int X,int Y,String text) {
         posX = X;
         posY = Y;
         type = t;
+        status = false;
+        test = text;
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        status = true;
         if (getArguments() != null) {
 
         }
@@ -44,6 +49,8 @@ public class Bouton extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentBoutonBinding.inflate(inflater,container,false);
+        binding.textView2.setText(test);
+        status = true;
         return binding.getRoot();
         //inflater.inflate(R.layout.fragment_question, container, false);
     }
@@ -57,6 +64,8 @@ public class Bouton extends Fragment {
             }
         });
     }
-
+    public boolean getStatus(){
+        return status;
+    }
 
 }
