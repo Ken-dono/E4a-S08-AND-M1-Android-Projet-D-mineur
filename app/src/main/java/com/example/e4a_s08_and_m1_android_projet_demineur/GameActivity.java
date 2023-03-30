@@ -100,7 +100,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
                 mineGridRecyclerAdapter.setCells(mineSweeperGame.getMineGrid().getCells());
                 timerStarted = false;
                 countDownTimer.cancel();
-                secondsElapsed = 0,
+                secondsElapsed = 0;
                 timer.setText(R.string.default_count);
                 flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
             }
