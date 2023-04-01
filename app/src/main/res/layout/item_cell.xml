@@ -14,7 +14,8 @@
         android:fontFamily="@font/alfa_slab_one"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@color/gray"/>
 
 
 </LinearLayout>

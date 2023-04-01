@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,11 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
@@ -28,12 +36,9 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     private static final int TAILLE_MEDIUM = 8;
     private static final int TAILLE_HARD = 10;
 
-    private static final int BOMB_EASY = 5;
-    private static final int BOMB_MEDIUM = 8;
-    private static final int BOMB_HARD = 10;
-
-
-    private Cellule[][] plateau;
+    private static final int BOMB_EASY = 3;
+    private static final int BOMB_MEDIUM = 10;
+    private static final int BOMB_HARD = 20;
 
     private RecyclerView grid;
     //private Switch flagSwitch = null;
@@ -45,6 +50,10 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     private CountDownTimer countDownTimer;
     private MineSweeperGame mineSweeperGame;
     String difficulty;
+
+    public Activity activity;
+
+    public DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Classement");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,13 +142,20 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
 
         if (mineSweeperGame.isGameOver()) {
             countDownTimer.cancel();
-            Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+
+            //Show Popup Dialog
+            showEndGameDialog(false);
+
+
             mineSweeperGame.getMineGrid().revealAllBombs();
         }
 
         if (mineSweeperGame.isGameWon()) {
             countDownTimer.cancel();
-            Toast.makeText(getApplicationContext(), "Game Won", Toast.LENGTH_SHORT).show();
+
+            //Show Popup Dialog
+            showEndGameDialog(true);
+
             mineSweeperGame.getMineGrid().revealAllBombs();
         }
 
@@ -158,16 +174,93 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
 
         if (mineSweeperGame.isGameOver()) {
             countDownTimer.cancel();
-            Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+
+            //Show Popup Dialog
+            showEndGameDialog(false);
             mineSweeperGame.getMineGrid().revealAllBombs();
         }
 
         if (mineSweeperGame.isGameWon()) {
             countDownTimer.cancel();
-            Toast.makeText(getApplicationContext(), "Game Won", Toast.LENGTH_SHORT).show();
+
+            //Show Popup Dialog
+            showEndGameDialog(true);
             mineSweeperGame.getMineGrid().revealAllBombs();
         }
-
         mineGridRecyclerAdapter.setCells(mineSweeperGame.getMineGrid().getCells());
+    }
+
+    private void showEndGameDialog(boolean isVictory) {
+
+        Dialog dialog;
+
+        dialog = new Dialog(GameActivity.this);
+
+        if (isVictory){
+
+            EditText playerName;
+            Button validate;
+
+            dialog.setContentView(R.layout.victory_popup);
+            playerName = dialog.findViewById(R.id.playerNameEditText);
+
+            validate = dialog.findViewById(R.id.ValidateButton);
+
+            validate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String playerNameString = playerName.getText().toString();
+
+                    if (playerNameString.isEmpty()){
+
+                        Toast.makeText(getApplicationContext(), "Le pseudo n'est pas Valide", Toast.LENGTH_LONG).show();
+                    }else{
+                        writeToDatabase.newScore(difficulty, playerNameString, secondsElapsed);
+                        Toast.makeText(getApplicationContext(), "Votre Score a bien été enregistré !", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                        dialog.dismiss();
+                    }
+                }
+            });
+        }else{
+
+            Button restartButton, backToMenu;
+
+            dialog.setContentView(R.layout.lose_popup);
+
+            restartButton = dialog.findViewById(R.id.restartButton);
+            backToMenu = dialog.findViewById(R.id.backToMenuButton);
+
+            restartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    mineSweeperGame = new MineSweeperGame(taille, bombCount);
+                    mineGridRecyclerAdapter.setCells(mineSweeperGame.getMineGrid().getCells());
+                    timerStarted = false;
+                    countDownTimer.cancel();
+                    secondsElapsed = 0;
+                    timer.setText(R.string.default_count);
+                    flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
+                    dialog.dismiss();
+                }
+            });
+
+            backToMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        dialog.show();
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">E4a-S08-AND-M1-Android-Projet-Demineur</string>
+    <string name="app_name">Demineur</string>
     <string name="hard">DIFFICILE</string>
     <string name="medium">MOYEN</string>
     <string name="easy">FACILE</string>

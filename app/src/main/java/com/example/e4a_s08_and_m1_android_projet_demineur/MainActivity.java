@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.e4a_s08_and_m1_android_projet_demineur.databinding.ActivityMainBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.lang.ref.Reference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
                 // Start the game activity and pass the selected difficulty as an extra
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 intent.putExtra("difficulty", selectedDifficulty);
+                startActivity(intent);
+            }
+        });
+
+        binding.classement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Classement.class);
                 startActivity(intent);
             }
         });
