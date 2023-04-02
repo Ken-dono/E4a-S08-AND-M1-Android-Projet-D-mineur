@@ -38,7 +38,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
 
     private static final int BOMB_EASY = 3;
     private static final int BOMB_MEDIUM = 10;
-    private static final int BOMB_HARD = 20;
+    private static final int BOMB_HARD = 16;
 
     private RecyclerView grid;
     //private Switch flagSwitch = null;
@@ -195,6 +195,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         Dialog dialog;
 
         dialog = new Dialog(GameActivity.this);
+        dialog.setCancelable(false);
 
         if (isVictory){
 
@@ -202,6 +203,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
             Button validate;
 
             dialog.setContentView(R.layout.victory_popup);
+
             playerName = dialog.findViewById(R.id.playerNameEditText);
 
             validate = dialog.findViewById(R.id.ValidateButton);
