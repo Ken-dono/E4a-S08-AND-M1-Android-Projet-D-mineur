@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,8 +40,7 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     private static final int BOMB_HARD = 16;
 
     private RecyclerView grid;
-    //private Switch flagSwitch = null;
-    private TextView restart, timer, flag, flagsLeft;
+    private TextView restart, timer, flagsLeft;
     private Button returnM;
     private MineGridRecyclerAdapter mineGridRecyclerAdapter;
     private boolean timerStarted;
@@ -46,14 +49,14 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     private MineSweeperGame mineSweeperGame;
     String difficulty;
 
-    public Activity activity;
-
-    public DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Classement");
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         Intent intent = getIntent();
 
@@ -183,6 +186,13 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
             mineSweeperGame.getMineGrid().revealAllBombs();
         }
         mineGridRecyclerAdapter.setCells(mineSweeperGame.getMineGrid().getCells());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            vibrator.vibrate(50);
+        }
     }
 
     private void showEndGameDialog(boolean isVictory) {
