@@ -1,4 +1,4 @@
-package com.example.e4a_s08_and_m1_android_projet_demineur;
+package com.example.e4a_s08_and_m1_android_projet_demineur.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -6,30 +6,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.e4a_s08_and_m1_android_projet_demineur.adapters.MineGridRecyclerAdapter;
+import com.example.e4a_s08_and_m1_android_projet_demineur.listeners.OnCellClickListener;
+import com.example.e4a_s08_and_m1_android_projet_demineur.R;
+import com.example.e4a_s08_and_m1_android_projet_demineur.objects.Cell;
+import com.example.e4a_s08_and_m1_android_projet_demineur.objects.MineSweeperGame;
+import com.example.e4a_s08_and_m1_android_projet_demineur.writeToDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Random;
-
-public class GameActivity extends AppCompatActivity implements OnCellClickListener{
+public class GameActivity extends AppCompatActivity implements OnCellClickListener {
 
     public static final long TIMER_LENGTH = 999000L;
     private static final int TAILLE_EASY = 5;

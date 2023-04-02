@@ -1,4 +1,4 @@
-package com.example.e4a_s08_and_m1_android_projet_demineur;
+package com.example.e4a_s08_and_m1_android_projet_demineur.objects;
 
 public class Cell {
     public static final int BOMB = -1;

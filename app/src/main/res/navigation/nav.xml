@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/easyLeaderboardFragment">
+    <fragment
+        android:id="@+id/easyLeaderboardFragment"
+        android:name="com.example.e4a_s08_and_m1_android_projet_demineur.fragments.EasyLeaderboardFragment"
+        android:label="fragment_easy_leaderboard"
+        tools:layout="@layout/fragment_easy_leaderboard" />
+    <fragment
+        android:id="@+id/mediumLeaderboardFragment"
+        android:name="com.example.e4a_s08_and_m1_android_projet_demineur.fragments.MediumLeaderboardFragment"
+        android:label="fragment_medium_leaderboard"
+        tools:layout="@layout/fragment_medium_leaderboard" />
+    <fragment
+        android:id="@+id/hardLeaderboardFragment"
+        android:name="com.example.e4a_s08_and_m1_android_projet_demineur.fragments.HardLeaderboardFragment"
+        android:label="fragment_hard_leaderboard"
+        tools:layout="@layout/fragment_hard_leaderboard" />
+</navigation>

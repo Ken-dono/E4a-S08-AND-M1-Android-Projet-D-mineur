@@ -1,4 +1,4 @@
-package com.example.e4a_s08_and_m1_android_projet_demineur;
+package com.example.e4a_s08_and_m1_android_projet_demineur.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.e4a_s08_and_m1_android_projet_demineur.R;
 import com.example.e4a_s08_and_m1_android_projet_demineur.databinding.ActivityMainBinding;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.lang.ref.Reference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         binding.classement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Classement.class);
+                Intent intent = new Intent(MainActivity.this, LeaderBoardActivity.class);
                 startActivity(intent);
             }
         });

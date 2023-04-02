@@ -1,4 +1,4 @@
-package com.example.e4a_s08_and_m1_android_projet_demineur;
+package com.example.e4a_s08_and_m1_android_projet_demineur.adapters;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.e4a_s08_and_m1_android_projet_demineur.listeners.OnCellClickListener;
+import com.example.e4a_s08_and_m1_android_projet_demineur.R;
+import com.example.e4a_s08_and_m1_android_projet_demineur.objects.Cell;
 
 import java.util.List;
 

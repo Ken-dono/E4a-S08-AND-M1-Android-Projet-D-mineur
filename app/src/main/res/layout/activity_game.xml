@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity"
+    tools:context=".activities.GameActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/cardview_light_background">
+    android:background="?backgroundColor">
 
     <LinearLayout
         android:layout_width="wrap_content"
