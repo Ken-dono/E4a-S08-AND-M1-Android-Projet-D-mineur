@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,8 +26,6 @@ import com.example.e4a_s08_and_m1_android_projet_demineur.R;
 import com.example.e4a_s08_and_m1_android_projet_demineur.objects.Cell;
 import com.example.e4a_s08_and_m1_android_projet_demineur.objects.MineSweeperGame;
 import com.example.e4a_s08_and_m1_android_projet_demineur.writeToDatabase;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class GameActivity extends AppCompatActivity implements OnCellClickListener {
 
@@ -53,14 +50,20 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
 
     Vibrator vibrator;
 
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer BackgroundSong;
+    private MediaPlayer onCellClickSound;
+    private MediaPlayer gameOverSound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.musique_mario);
-        mediaPlayer.start();
+        BackgroundSong = MediaPlayer.create(getApplicationContext(), R.raw.musique_mario);
+        BackgroundSong.start();
+
+
+        gameOverSound = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
+        onCellClickSound = MediaPlayer.create(getApplicationContext(), R.raw.on_click_pop);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -139,6 +142,8 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         mineSweeperGame.handleCellClick(cell);
         flagsLeft.setText(String.format("%03d", mineSweeperGame.getNumberBombs() - mineSweeperGame.getFlagCount()));
 
+        onCellClickSound.start();
+
         if (!timerStarted) {
             countDownTimer.start();
             timerStarted = true;
@@ -147,8 +152,10 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         if (mineSweeperGame.isGameOver()) {
             countDownTimer.cancel();
 
-            //Show Popup Dialog
+            incrshared(false, difficulty);
             showEndGameDialog(false);
+            BackgroundSong.stop();
+            gameOverSound.start();
 
 
             mineSweeperGame.getMineGrid().revealAllBombs();
@@ -157,8 +164,10 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         if (mineSweeperGame.isGameWon()) {
             countDownTimer.cancel();
 
-            //Show Popup Dialog
+            incrshared(true, difficulty);
             showEndGameDialog(true);
+            BackgroundSong.stop();
+            gameOverSound.start();
 
             mineSweeperGame.getMineGrid().revealAllBombs();
         }
@@ -283,9 +292,14 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
     @Override
     protected void onStop() {
         super.onStop();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
+        if (BackgroundSong != null) {
+            BackgroundSong.release();
+            BackgroundSong = null;
+        }
+
+        if (gameOverSound != null) {
+            gameOverSound.release();
+            gameOverSound = null;
         }
     }
 
@@ -295,12 +309,35 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         SharedPreferences preferences = getSharedPreferences("stats", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        //preferences.getInt()
+        int totalGamesPlayed = preferences.getInt("totalGamesPlayed", 0);
+
+        totalGamesPlayed +=1;
+
+            editor.putInt("totalGamesPlayed", totalGamesPlayed);
 
 
         if (isVictory){
 
+            switch (difficulty){
 
+                case "easy":
+
+                    int easyWin = preferences.getInt("easyWin", 0);
+                    editor.putInt("easyWin", easyWin + 1);
+                    break;
+
+                case "medium":
+                    int mediumWin = preferences.getInt("mediumWin", 0);
+                    editor.putInt("easyWin", mediumWin + 1);
+                    break;
+
+                case "hard":
+                    int hardWin = preferences.getInt("hardWin", 0);
+                    editor.putInt("easyWin", hardWin + 1);
+                    break;
+
+            }
         }
+        editor.commit();
     }
 }
