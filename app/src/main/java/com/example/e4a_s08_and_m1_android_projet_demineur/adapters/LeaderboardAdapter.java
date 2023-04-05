@@ -21,13 +21,11 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     Context context;
     ArrayList<LeaderboardModel> list;
-    String difficulty;
 
     public LeaderboardAdapter(Context context, ArrayList<LeaderboardModel> list) {
 
         this.context = context;
         this.list = list;
-        this.difficulty = difficulty;
     }
 
     @NonNull

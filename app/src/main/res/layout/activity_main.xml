@@ -17,6 +17,17 @@
         android:visibility="visible">
     </Button>
 
+    <Button
+        android:id="@+id/statsButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Statistiques"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
+        android:layout_marginTop="5dp"
+        android:visibility="visible">
+    </Button>
+
 
         <ImageView
             android:id="@+id/imageView"
