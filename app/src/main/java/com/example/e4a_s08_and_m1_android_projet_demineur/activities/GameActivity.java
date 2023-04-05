@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -51,10 +52,14 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
 
     Vibrator vibrator;
 
+    private MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.musique_mario);
+        mediaPlayer.start();
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -269,5 +274,14 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         }
 
         dialog.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
