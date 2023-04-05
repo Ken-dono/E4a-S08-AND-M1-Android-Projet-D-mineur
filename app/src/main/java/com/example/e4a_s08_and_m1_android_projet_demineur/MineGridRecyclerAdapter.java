@@ -79,9 +79,9 @@ public class MineGridRecyclerAdapter extends RecyclerView.Adapter<MineGridRecycl
                 } else {
                     valueTextView.setText(String.valueOf(cell.getValue()));
                     if (cell.getValue() == 1) {
-                        valueTextView.setTextColor(Color.BLUE);
+                        valueTextView.setTextColor(Color.rgb(8, 196, 62));
                     } else if (cell.getValue() == 2) {
-                        valueTextView.setTextColor(Color.GREEN);
+                        valueTextView.setTextColor(Color.BLUE);
                     } else if (cell.getValue() == 3) {
                         valueTextView.setTextColor(Color.RED);
                     }
