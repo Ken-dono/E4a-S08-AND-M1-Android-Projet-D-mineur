@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -228,6 +229,9 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
 
                         Toast.makeText(getApplicationContext(), "Le pseudo n'est pas Valide", Toast.LENGTH_LONG).show();
                     }else{
+
+
+
                         writeToDatabase.newScore(difficulty, playerNameString, secondsElapsed);
                         Toast.makeText(getApplicationContext(), "Votre Score a bien été enregistré !", Toast.LENGTH_LONG).show();
 
@@ -282,6 +286,21 @@ public class GameActivity extends AppCompatActivity implements OnCellClickListen
         if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
+        }
+    }
+
+
+    private void incrshared(boolean isVictory, String difficulty){
+
+        SharedPreferences preferences = getSharedPreferences("stats", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        //preferences.getInt()
+
+
+        if (isVictory){
+
+
         }
     }
 }
